@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMR 计算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    
+    h2 {
+      text-align: center;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+    
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>BMR 计算器</h2>
+    <form onsubmit="calculateBMR(event)">
+      <label for="gender">性别：</label>
+      <input type="radio" name="gender" value="male" checked> 男性
+      <input type="radio" name="gender" value="female"> 女性
+      
+      <label for="weight">体重（公斤）：</label>
+      <input type="number" name="weight" id="weight" step="0.1" required>
+      
+      <label for="height">身高（厘米）：</label>
+      <input type="number" name="height" id="height" step="0.1" required>
+      
+      <label for="age">年龄：</label>
+      <input type="number" name="age" id="age" required>
+      
+      <input type="submit" value="计算">
+    </form>
+    
+    <div id="result" class="result"></div>
+  </div>
+  
+  <script>
+    function calculateBMR(event) {
+      event.preventDefault(); // 防止表单提交
+      
+      var genderInputs = document.getElementsByName("gender");
+      var weightInput = document.getElementById("weight");
+      var heightInput = document.getElementById("height");
+      var ageInput = document.getElementById("age");
+      var resultDiv = document.getElementById("result");
+      
+      var gender = "";
+      for (var i = 0; i < genderInputs.length; i++) {
+        if (genderInputs[i].checked) {
+          gender = genderInputs[i].value;
+          break;
+        }
+      }
+      
+      var weight = parseFloat(weightInput.value);
+      var height = parseFloat(heightInput.value) / 100; // 转换为米
+      var age = parseInt(ageInput.value);
+      
+      if (isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) {
+        resultDiv.textContent = "请输入有效的体重、身高和年龄值。";
+    return;
+    }
+  var bmr = 0;
+  
+  if (gender === "male") {
+    bmr = 10 * weight + 6.25 * height * 100 - 5 * age + 5;
+  } else {
+    bmr = 10 * weight + 6.25 * height * 100 - 5 * age - 161;
+  }
+  
+  bmr = bmr.toFixed(1); // 保留一位小数
+  
+  resultDiv.textContent = "您的 BMR 是 " + bmr + " 千卡。";
+}
+  </script>
+</body>
+</html>
