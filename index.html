@@ -26,6 +26,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <!-- =======================================================
   * Template Name: iPortfolio
@@ -36,6 +37,24 @@
   ======================================================== -->
 </head>
 
+  <script>
+    $(document).ready(function() {
+      var validIds = ['id1', 'id2', 'id3'];
+      var id = prompt("请输入");
+
+      if (validIds.includes(id)) {
+        $('#about').show();
+        alert(id);
+      } else {
+        $('#about').hide();
+      }
+
+
+      $("#teacher").click(function(){
+        $("#text").toggle();
+      });
+    });
+  </script>
 <body>
 
   <!-- ======= Mobile nav toggle button ======= -->
@@ -79,7 +98,13 @@
 </section><!-- End Hero -->
 
   <main id="main">
-
+  <style>
+    #teacher:hover {
+      color: red;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container">
@@ -93,11 +118,11 @@
             <img src="https://source.unsplash.com/960x640/?teacher" class="img-fluid" alt="teacher">
           </div>
           <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>張老師</h3>
+            <h3 id=teacher>張老師</h3>
             <p class="fst-italic">
               本人熱愛網頁設計，擁有豐富的網頁開發經驗。
             </p>
-            <div class="row">
+            <div class="row" id=text>
               <div class="col-lg-6">
                 <ul>
                   <li><i class="bi bi-chevron-right"></i> <strong>生日:</strong> <span>1985年5月1日</span></li>
@@ -504,7 +529,7 @@
           </div>
 
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="name">您的姓名</label>
@@ -521,20 +546,42 @@
               </div>
               <div class="form-group">
               <label for="name">訊息內容</label>
-              <textarea class="form-control" name="message" rows="10" required></textarea>
+              <textarea class="form-control" name="message" id="message" rows="10" required></textarea>
               </div>
               <div class="my-3">
               <div class="loading">載入中</div>
               <div class="error-message"></div>
               <div class="sent-message">您的訊息已成功送出，感謝您的聯絡！</div>
               </div>
-              <div class="text-center"><button type="submit">送出訊息</button></div>
+              <div class="text-center"><button type="submit" id=submit>送出訊息</button></div>
+            <div id="formContent"></div>
             </form>
           </div>
         </div>
       </div>
     </section><!-- End Contact Section -->
   </main><!-- End #main -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#submit').click(function() {
+
+        // 获取表单字段的值
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var subject = $('#subject').val();
+        var message = $('#message').val();
+
+        // 显示字段内容
+        var content = "您的姓名: " + name + "<br>" +
+                      "您的Email: " + email + "<br>" +
+                      "主旨: " + subject + "<br>" +
+                      "訊息內容: " + message;
+
+        $('#formContent').html(content);
+      });
+    });
+</script>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
