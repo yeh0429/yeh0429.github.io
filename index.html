@@ -37,24 +37,7 @@
   ======================================================== -->
 </head>
 
-  <script>
-    $(document).ready(function() {
-      var validIds = ['id1', 'id2', 'id3'];
-      var id = prompt("请输入");
 
-      if (validIds.includes(id)) {
-        $('#about').show();
-        alert(id);
-      } else {
-        $('#about').hide();
-      }
-
-
-      $("#teacher").click(function(){
-        $("#text").toggle();
-      });
-    });
-  </script>
 <body>
 
   <!-- ======= Mobile nav toggle button ======= -->
@@ -562,26 +545,7 @@
     </section><!-- End Contact Section -->
   </main><!-- End #main -->
 
-<script type="text/javascript">
-    $(document).ready(function() {
-      $('#submit').click(function() {
 
-        // 获取表单字段的值
-        var name = $('#name').val();
-        var email = $('#email').val();
-        var subject = $('#subject').val();
-        var message = $('#message').val();
-
-        // 显示字段内容
-        var content = "您的姓名: " + name + "<br>" +
-                      "您的Email: " + email + "<br>" +
-                      "主旨: " + subject + "<br>" +
-                      "訊息內容: " + message;
-
-        $('#formContent').html(content);
-      });
-    });
-</script>
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
